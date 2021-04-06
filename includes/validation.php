@@ -15,12 +15,16 @@ class Plugin
 
     public function widget_scripts()
     {
-        wp_enqueue_script('infinite-scroll-js', plugin_dir_url(__FILE__) . '../assets/js/infinite-scroll.pkgd.min.js', '', '', true);
+        if (is_shop() || is_product_category() || is_product_tag()) {
+            wp_enqueue_script('infinite-scroll-js', plugin_dir_url(__FILE__) . '../assets/js/infinite-scroll.pkgd.min.js', '', '', true);
+        }
     }
 
     public function widget_styles()
     {
-        wp_register_style('infinite-scroll-elementor-css', plugins_url('../assets/css/infinite-scroll-elementor.css', __FILE__));
+        if (is_shop() || is_product_category() || is_product_tag()) {
+            wp_register_style('infinite-scroll-elementor-css', plugins_url('../assets/css/infinite-scroll-elementor.css', __FILE__));
+        }
     }
 
     private function include_widgets_files()
